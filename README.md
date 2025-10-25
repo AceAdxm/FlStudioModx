@@ -15,7 +15,7 @@ This project is my personal sandbox for testing FL Studio behaviors, crafting pr
 💡 **Goals:**
 
 * Understand how FL Studio handles complex mixer routing.
-* Build experimental tools like a *Stem Splitter* to improve workflow.
+* work on experimental tools like a *Stem Splitter* to improve workflow.
 * Log findings & observations safely for educational purposes.
 
 > ⚠️ **Disclaimer:** Everything here is for **educational and ethical research only.** No proprietary code, DRM bypassing, or exploit distribution is included or supported.
