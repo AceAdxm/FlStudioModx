@@ -4,6 +4,10 @@
 
 ---
 
+## ❓ Reg Key
+The reg key (key used for fl studio) can be found in the branch above under [Key gen FL25.1.reg]() ---> This is a free experimental key , this is not for obtaining a cracked version of Fl studio
+
+
 ## 🌟 Overview
 
 This project is my personal sandbox for testing FL Studio behaviors, crafting prototype tools, and studying how routing, stems, and signal flow interact under the hood.
