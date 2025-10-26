@@ -9,7 +9,7 @@ CheckAndRename:
     {
         this_id := id%A_Index%
         WinGetTitle, currentTitle, ahk_id %this_id%
-        if (InStr(currentTitle, "FL Studio 26 beta by ADZ") = 0) {
+        if (InStr(currentTitle, "FL Studio by ADZ") = 0) {
             WinSetTitle, ahk_id %this_id%, , FL by ADZ
         }
     }
