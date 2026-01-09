@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>FL Studio Theme Editor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- React 18 -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+
+  <body class="bg-black">
+    <div id="root"></div>
+
+    <!-- App Code -->
+    <script type="text/babel" data-type="module">
+      import {
+        Upload,
+        Download,
+        Moon,
+        Sun,
+        Palette,
+        Image,
+        Settings,
+        FileText,
+        Maximize2,
+        Menu,
+        Github,
+        Heart
+      } from "https://esm.sh/lucide-react@0.344.0";
+
+      const { useState, useRef } = React;
+
+      function FLThemeEditor() {
+        const [images, setImages] = useState([]);
+        const [activeTab, setActiveTab] = useState("instructions");
+        const [darkMode, setDarkMode] = useState(true);
+        const [brightness, setBrightness] = useState(-40);
+        const [contrast, setContrast] = useState(110);
+        const [saturation, setSaturation] = useState(80);
+        const [hueShift, setHueShift] = useState(0);
+        const [themeName, setThemeName] = useState("My FL Studio Theme");
+
+        const fileInputRef = useRef(null);
+
+        const [uiElements, setUiElements] = useState({
+          titleBar: { background: "#1a1a1a", text: "#ffffff", buttonHover: "#3a3a3a" },
+          menuBar: { background: "#252525", text: "#ffffff", hover: "#353535" },
+          toolbar: { background: "#2a2a2a", icons: "#ffffff", hover: "#3a3a3a" },
+          channelRack: { background: "#1e1e1e", stepOn: "#5a9fd4", stepOff: "#2a2a2a" },
+          playlist: { background: "#1a1a1a", grid: "#2a2a2a", pattern: "#3a5a7a" },
+          mixer: { background: "#1e1e1e", tracks: "#2a2a2a", meters: "#5a9fd4" },
+          piano: { whiteKeys: "#e8e8e8", blackKeys: "#1a1a1a", pressed: "#5a9fd4" },
+          buttons: { play: "#5cb85c", stop: "#d9534f", record: "#ff0000", normal: "#3a3a3a" }
+        });
+
+        const handleFileUpload = (e) => {
+          const files = Array.from(e.target.files);
+          files.forEach((file) => {
+            if (!file.type.startsWith("image/")) return;
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+              setImages((prev) => [
+                ...prev,
+                { name: file.name, original: ev.target.result, modified: ev.target.result }
+              ]);
+            };
+            reader.readAsDataURL(file);
+          });
+        };
+
+        const applyDarkMode = (imageData) =>
+          new Promise((resolve) => {
+            const img = new window.Image();
+            img.onload = () => {
+              const canvas = document.createElement("canvas");
+              canvas.width = img.width;
+              canvas.height = img.height;
+              const ctx = canvas.getContext("2d");
+
+              ctx.filter = `brightness(${100 + brightness}%) contrast(${contrast}%) saturate(${saturation}%) hue-rotate(${hueShift}deg)`;
+              ctx.drawImage(img, 0, 0);
+
+              if (darkMode) {
+                const imageDataObj = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageDataObj.data;
+                for (let i = 0; i < data.length; i += 4) {
+                  const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+                  if (avg > 200) {
+                    data[i] -= 180;
+                    data[i + 1] -= 180;
+                    data[i + 2] -= 180;
+                  }
+                }
+                ctx.putImageData(imageDataObj, 0, 0);
+              }
+
+              resolve(canvas.toDataURL("image/png"));
+            };
+            img.src = imageData;
+          });
+
+        const processAllImages = async () => {
+          const processed = await Promise.all(
+            images.map(async (img) => ({
+              ...img,
+              modified: await applyDarkMode(img.original)
+            }))
+          );
+          setImages(processed);
+        };
+
+        const downloadImage = (data, name) => {
+          const a = document.createElement("a");
+          a.href = data;
+          a.download = name;
+          a.click();
+        };
+
+        const downloadAllImages = () => {
+          images.forEach((img) => downloadImage(img.modified, `dark_${img.name}`));
+        };
+
+        return (
+          <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white p-6">
+            <div className="max-w-7xl mx-auto">
+              <h1 className="text-5xl font-bold text-center mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                FL Studio Theme Editor
+              </h1>
+
+              <div className="flex justify-center gap-4 mb-8">
+                <a
+                  href="https://github.com/AceAdxm"
+                  target="_blank"
+                  className="flex items-center gap-2 bg-gray-800 px-4 py-2 rounded"
+                >
+                  <Github size={18} /> GitHub
+                </a>
+                <a
+                  href="https://github.com/AceAdxm/FlStudioModx"
+                  target="_blank"
+                  className="flex items-center gap-2 bg-pink-600 px-4 py-2 rounded"
+                >
+                  <Heart size={18} /> Star Project
+                </a>
+              </div>
+
+              <div className="bg-gray-800 p-4 rounded mb-6">
+                <input
+                  value={themeName}
+                  onChange={(e) => setThemeName(e.target.value)}
+                  className="w-full bg-gray-900 border border-gray-600 rounded px-4 py-2"
+                />
+              </div>
+
+              <div className="flex gap-4 mb-4">
+                <button onClick={() => setActiveTab("images")} className="px-4 py-2 bg-blue-600 rounded">
+                  PNG Editor
+                </button>
+                <button onClick={() => setActiveTab("export")} className="px-4 py-2 bg-purple-600 rounded">
+                  Export
+                </button>
+              </div>
+
+              {activeTab === "images" && (
+                <>
+                  <button
+                    onClick={() => fileInputRef.current.click()}
+                    className="bg-blue-600 px-4 py-2 rounded mb-4"
+                  >
+                    Upload Images
+                  </button>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    multiple
+                    accept="image/*"
+                    onChange={handleFileUpload}
+                    className="hidden"
+                  />
+
+                  <button
+                    onClick={processAllImages}
+                    className="bg-purple-600 px-4 py-2 rounded ml-2"
+                  >
+                    Apply Changes
+                  </button>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                    {images.map((img, i) => (
+                      <div key={i} className="bg-gray-900 p-3 rounded">
+                        <p className="text-sm mb-2">{img.name}</p>
+                        <img src={img.modified} className="rounded mb-2" />
+                        <button
+                          onClick={() => downloadImage(img.modified, `dark_${img.name}`)}
+                          className="w-full bg-green-600 py-1 rounded"
+                        >
+                          Download
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+
+              {activeTab === "export" && (
+                <div className="bg-gray-900 p-6 rounded">
+                  <button
+                    onClick={downloadAllImages}
+                    className="bg-green-600 px-4 py-2 rounded"
+                  >
+                    Download All Images
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<FLThemeEditor />);
+    </script>
+  </body>
+</html>
