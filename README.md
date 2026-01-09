@@ -1,45 +1,39 @@
 # FL Studio ModX  
-**Custom Theme Framework for FL Studio**
+**A Custom UI Theming Framework for FL Studio**
 
-FL Studio ModX is a theming framework that enables **advanced UI customization** for FL Studio. It allows fully custom themes with precise control over colors, contrast, and interface styling beyond default limitations.
+**FL Studio ModX** is a visual modification framework designed specifically to extend and unlock FL Studio’s theming system. It allows users to create, apply, and iterate on **fully custom UI themes**, giving complete control over colors, contrast, and interface styling beyond FL Studio’s default options.
 
 🌐 **Project Website**  
 https://aceadxm.github.io/FlStudioModx/  
-*(In active development)*
+*(Currently under development)*
 
 ---
 
-## Overview
+## What Is ModX?
 
-ModX is built for producers, designers, and developers who want FL Studio to look as good as it sounds.
+ModX is not a single theme — it is a **framework**.
 
-It provides a flexible foundation for:
-- Custom color schemes  
-- UI contrast and accent tuning  
-- Visual style experimentation  
-- Theme iteration without modifying core logic  
+It provides the structure and tools needed to override FL Studio’s default UI visuals with user-defined styles, making custom theme creation more flexible, scalable, and maintainable.
+
+ModX is intended for:
+- Users who want deeper UI customization  
+- Theme designers building unique FL Studio aesthetics  
+- Developers experimenting with FL Studio UI modification  
 
 ---
 
-## Features
+## Core Features
 
-- Full custom theme support  
-- Editable UI colors and style elements  
-- Extensible framework-based design  
-- Centralized documentation and updates  
+- Framework-based custom theme system  
+- Full control over UI colors and visual styling  
+- Designed for easy theme iteration and expansion  
+- Extensible structure for future theming methods  
+- Centralized platform for documentation and updates  
 
 ---
 
 ## Screenshots
 
-> Add your screenshots here
-
-Suggested layout:
-- Full interface overview  
-- Playlist and Mixer close-ups  
-- Before / After comparisons  
-
-```text
 [ Screenshot 1 ]
 [ Screenshot 2 ]
 [ Screenshot 3 ]
