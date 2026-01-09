@@ -1,64 +1,45 @@
-# FL Studio ModX – Custom Theme Framework
+# FL Studio ModX  
+**Custom Theme Framework for FL Studio**
 
-**FL Studio ModX** is a custom theming framework designed to modify and personalize the visual appearance of FL Studio. This project focuses exclusively on enabling **custom UI themes**, giving users greater control over colors, styles, and overall aesthetics beyond the default limitations of FL Studio.
+FL Studio ModX is a theming framework that enables **advanced UI customization** for FL Studio. It allows fully custom themes with precise control over colors, contrast, and interface styling beyond default limitations.
 
-🌐 Project Website:  
+🌐 **Project Website**  
 https://aceadxm.github.io/FlStudioModx/  
-*(Website is currently under development)*
+*(In active development)*
 
 ---
 
 ## Overview
 
-FL Studio ModX was created to explore and extend FL Studio’s theming capabilities. The mod allows users to design and apply **fully custom themes**, enabling deeper personalization of the interface while maintaining usability.
+ModX is built for producers, designers, and developers who want FL Studio to look as good as it sounds.
 
-This project is intended for:
-- Users who want custom FL Studio color schemes
-- Theme designers experimenting with UI aesthetics
-- Developers interested in FL Studio UI modification workflows
+It provides a flexible foundation for:
+- Custom color schemes  
+- UI contrast and accent tuning  
+- Visual style experimentation  
+- Theme iteration without modifying core logic  
 
 ---
 
 ## Features
 
-- Custom theme creation support  
-- Editable color and UI style elements  
-- Framework designed for extensibility  
-- Centralized platform for theme-related updates and documentation  
+- Full custom theme support  
+- Editable UI colors and style elements  
+- Extensible framework-based design  
+- Centralized documentation and updates  
 
 ---
 
-## How It’s Used
+## Screenshots
 
-FL Studio ModX provides the foundation for building and applying custom themes to FL Studio. Users can modify visual elements such as:
-- UI colors  
-- Contrast and accent tones  
-- Interface styling components  
+> Add your screenshots here
 
-The mod is structured so themes can be adjusted, iterated on, and expanded without rewriting the core framework.
+Suggested layout:
+- Full interface overview  
+- Playlist and Mixer close-ups  
+- Before / After comparisons  
 
----
-
-## How the Mod Was Made
-
-This mod was developed by analyzing FL Studio’s theming structure and creating a system that allows custom-defined styles to override or replace default UI visuals. The goal was to make theme creation more accessible while keeping the system flexible for advanced customization.
-
-The project continues to evolve as new theming methods and improvements are explored.
-
----
-
-## Development Status
-
-⚠️ **Under Active Development**
-
-- Features and documentation are still being expanded  
-- Website content is not final  
-- APIs and theming methods may change  
-
-Expect ongoing updates and refinements.
-
----
-
-## Disclaimer
-
-This project is **not affiliated with Image-Line** or FL Studio. Use at your own discretion. Always back up your FL Studio installation before applying modifications.
+```text
+[ Screenshot 1 ]
+[ Screenshot 2 ]
+[ Screenshot 3 ]
