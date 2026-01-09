@@ -1,79 +1,64 @@
-# FL Studio Modx
+# FL Studio ModX – Custom Theme Framework
 
-**FL Studio Modx** is an experimental project focused on learning, research, and creative modification around FL Studio. This repository is a playground for exploring ideas, tools, and concepts related to workflow customization and visual experimentation.
+**FL Studio ModX** is a custom theming framework designed to modify and personalize the visual appearance of FL Studio. This project focuses exclusively on enabling **custom UI themes**, giving users greater control over colors, styles, and overall aesthetics beyond the default limitations of FL Studio.
 
-> ⚠️ This project is for **educational and experimental purposes only**.
-
----
-
-## ✨ What Is This?
-
-FL Studio Modx is an ongoing project where I experiment with:
-
-* Workflow tweaks and utilities
-* Visual and UI-related concepts
-* Tooling ideas that could enhance personalization
-
-Nothing here is meant to replace or redistribute FL Studio itself.
+🌐 Project Website:  
+https://aceadxm.github.io/FlStudioModx/  
+*(Website is currently under development)*
 
 ---
 
-## 🎨 Custom Themer (Work in Progress)
+## Overview
 
-🚧 **Custom Themer — In Development**
+FL Studio ModX was created to explore and extend FL Studio’s theming capabilities. The mod allows users to design and apply **fully custom themes**, enabling deeper personalization of the interface while maintaining usability.
 
-I am currently working on a **custom theming system** that will eventually allow users to:
-
-* Create **custom themes**
-* Modify colors and visual styles
-* Easily switch between themes
-
-This feature is **not finished yet** and **not available for use** at the moment.
-More details, documentation, and examples will be added once development progresses.
+This project is intended for:
+- Users who want custom FL Studio color schemes
+- Theme designers experimenting with UI aesthetics
+- Developers interested in FL Studio UI modification workflows
 
 ---
 
-## 📌 Current Status
+## Features
 
-* Project is **actively being worked on**
-* Features may change or be removed
-* Expect unfinished or experimental code
-
----
-
-## 📥 Getting Started
-
-```bash
-git clone https://github.com/AceAdxm/FlStudioModx.git
-cd FlStudioModx
-```
-
-Explore the repository to see current experiments and progress.
+- Custom theme creation support  
+- Editable color and UI style elements  
+- Framework designed for extensibility  
+- Centralized platform for theme-related updates and documentation  
 
 ---
 
-## ❗ Disclaimer
+## How It’s Used
 
-This project:
+FL Studio ModX provides the foundation for building and applying custom themes to FL Studio. Users can modify visual elements such as:
+- UI colors  
+- Contrast and accent tones  
+- Interface styling components  
 
-* Does **not** include FL Studio source code
-* Does **not** bypass licensing or DRM
-* Is **not affiliated with Image-Line**
-
-Use responsibly and at your own risk.
-
----
-
-## 📜 License
-
-This project is licensed under the **MIT License**. See the `LICENSE` file for more information.
+The mod is structured so themes can be adjusted, iterated on, and expanded without rewriting the core framework.
 
 ---
 
-## 💡 Future Plans
+## How the Mod Was Made
 
-* Finish and release the custom themer
-* Add documentation and usage examples
-* Improve structure and usability
+This mod was developed by analyzing FL Studio’s theming structure and creating a system that allows custom-defined styles to override or replace default UI visuals. The goal was to make theme creation more accessible while keeping the system flexible for advanced customization.
 
-Stay tuned 👀
+The project continues to evolve as new theming methods and improvements are explored.
+
+---
+
+## Development Status
+
+⚠️ **Under Active Development**
+
+- Features and documentation are still being expanded  
+- Website content is not final  
+- APIs and theming methods may change  
+
+Expect ongoing updates and refinements.
+
+---
+
+## Disclaimer
+
+This project is **not affiliated with Image-Line** or FL Studio. Use at your own discretion. Always back up your FL Studio installation before applying modifications.
