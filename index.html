@@ -456,8 +456,8 @@
                     </li>
                     <li><strong>Download Your Theme:</strong>
                         <ul>
-                            <li>Click "Download All Files" to get a ZIP containing everything</li>
-                            <li>Or download individual files as needed</li>
+                            <li>Click "Download All Files" to get all files</li>
+                            <li>Files will download individually to your downloads folder</li>
                         </ul>
                     </li>
                 </ol>
@@ -479,7 +479,7 @@
 
                 <h2>File Types Explained</h2>
                 <ul>
-                    <li><strong>theme_config.flstheme:</strong> Contains color definitions and theme settings</li>
+                    <li><strong>theme_config.fls:</strong> FL Studio theme configuration file with color definitions</li>
                     <li><strong>background.png:</strong> Your custom background image optimized for FL Studio</li>
                     <li><strong>colors.txt:</strong> Reference file with all your chosen colors</li>
                     <li><strong>install_instructions.txt:</strong> Detailed installation guide included in download</li>
@@ -602,26 +602,26 @@
                 text: document.getElementById('color4Hex').value
             };
 
-            // Generate XML config
-            const xmlContent = `<?xml version="1.0" encoding="UTF-8"?>
-<FLStudioTheme>
-    <Info>
-        <Name>${themeName}</Name>
-        <Author>${author}</Author>
-        <Version>1.0</Version>
-        <Date>${new Date().toISOString().split('T')[0]}</Date>
-    </Info>
-    <Colors>
-        <PrimaryAccent>${colors.primary}</PrimaryAccent>
-        <SecondaryAccent>${colors.secondary}</SecondaryAccent>
-        <HighlightColor>${colors.highlight}</HighlightColor>
-        <TextColor>${colors.text}</TextColor>
-    </Colors>
-    <Settings>
-        <BackgroundImage>background.png</BackgroundImage>
-        <UseCustomColors>true</UseCustomColors>
-    </Settings>
-</FLStudioTheme>`;
+            // Generate .fls theme file content (INI-style format that FL Studio can read)
+            const flsThemeContent = `[Theme]
+Name=${themeName}
+Author=${author}
+Version=1.0
+Date=${new Date().toISOString().split('T')[0]}
+
+[Colors]
+PrimaryAccent=${colors.primary}
+SecondaryAccent=${colors.secondary}
+HighlightColor=${colors.highlight}
+TextColor=${colors.text}
+PrimaryRGB=${hexToRgb(colors.primary)}
+SecondaryRGB=${hexToRgb(colors.secondary)}
+HighlightRGB=${hexToRgb(colors.highlight)}
+TextRGB=${hexToRgb(colors.text)}
+
+[Settings]
+BackgroundImage=background.png
+UseCustomColors=1`;
 
             // Generate colors reference
             const colorsContent = `FL Studio Theme Colors
@@ -654,7 +654,7 @@ INSTALLATION STEPS:
 3. BACKUP the original files first!
 4. Copy these files to the Artwork folder:
    - background.png
-   - theme_config.flstheme
+   - theme_config.fls
 5. Restart FL Studio
 6. Your theme should now be active!
 
@@ -676,7 +676,7 @@ For support, refer back to the theme creator tool.
 Generated: ${new Date().toLocaleString()}`;
 
             generatedFiles = {
-                'theme_config.flstheme': xmlContent,
+                'theme_config.fls': flsThemeContent,
                 'colors.txt': colorsContent,
                 'install_instructions.txt': instructionsContent,
                 'background.png': uploadedImage
@@ -703,9 +703,6 @@ Generated: ${new Date().toLocaleString()}`;
                 downloadFile(filename, generatedFiles[filename]);
             });
 
-            // Also download the HTML file itself
-            downloadHTMLFile();
-
             showStatus('All files downloaded! Check your downloads folder.', 'success');
         }
 
@@ -718,17 +715,6 @@ Generated: ${new Date().toLocaleString()}`;
             const a = document.createElement('a');
             a.href = url;
             a.download = filename;
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-
-        function downloadHTMLFile() {
-            const htmlContent = document.documentElement.outerHTML;
-            const blob = new Blob([htmlContent], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'fl_studio_theme_creator.html';
             a.click();
             URL.revokeObjectURL(url);
         }
