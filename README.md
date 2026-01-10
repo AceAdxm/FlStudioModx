@@ -15,7 +15,7 @@ ModX is not a single theme — it is a **framework**.
 
 It provides the structure and tools needed to override FL Studio’s default UI visuals with user-defined styles, making custom theme creation more flexible, scalable, and maintainable.
 
-ModX is intended for:
+ModX is intended for:  
 - Users who want deeper UI customization  
 - Theme designers building unique FL Studio aesthetics  
 - Developers experimenting with FL Studio UI modification  
@@ -34,6 +34,10 @@ ModX is intended for:
 
 ## Screenshots
 
-[ Screenshot 1 ]
-[ Screenshot 2 ]
-[ Screenshot 3 ]
+<p align="center">
+  <img src="https://github.com/AceAdxm/FlStudioModx/blob/main/Capture.PNG?raw=true" width="80%" alt="FL Studio ModX Screenshot 1">
+</p>
+
+<p align="center">
+  <img src="https://github.com/AceAdxm/FlStudioModx/blob/main/Capture2.PNG?raw=true" width="80%" alt="FL Studio ModX Screenshot 2">
+</p>
