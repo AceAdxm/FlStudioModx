@@ -479,7 +479,7 @@
 
                 <h2>File Types Explained</h2>
                 <ul>
-                    <li><strong>theme_config.fls:</strong> FL Studio theme configuration file with color definitions</li>
+                    <li><strong>theme.flstheme:</strong> FL Studio theme configuration file with color definitions</li>
                     <li><strong>background.png:</strong> Your custom background image optimized for FL Studio</li>
                     <li><strong>colors.txt:</strong> Reference file with all your chosen colors</li>
                     <li><strong>install_instructions.txt:</strong> Detailed installation guide included in download</li>
@@ -602,26 +602,25 @@
                 text: document.getElementById('color4Hex').value
             };
 
-            // Generate .fls theme file content (INI-style format that FL Studio can read)
-            const flsThemeContent = `[Theme]
-Name=${themeName}
-Author=${author}
-Version=1.0
-Date=${new Date().toISOString().split('T')[0]}
-
-[Colors]
-PrimaryAccent=${colors.primary}
-SecondaryAccent=${colors.secondary}
-HighlightColor=${colors.highlight}
-TextColor=${colors.text}
-PrimaryRGB=${hexToRgb(colors.primary)}
-SecondaryRGB=${hexToRgb(colors.secondary)}
-HighlightRGB=${hexToRgb(colors.highlight)}
-TextRGB=${hexToRgb(colors.text)}
-
-[Settings]
-BackgroundImage=background.png
-UseCustomColors=1`;
+            // Generate theme XML file (FL Studio uses XML-based theme format)
+            const flsThemeContent = `<?xml version="1.0" encoding="UTF-8"?>
+<FLStudioTheme>
+  <ThemeInfo>
+    <Name>${themeName}</Name>
+    <Author>${author}</Author>
+    <Version>1.0</Version>
+    <Date>${new Date().toISOString().split('T')[0]}</Date>
+  </ThemeInfo>
+  <Colors>
+    <Primary>${colors.primary}</Primary>
+    <Secondary>${colors.secondary}</Secondary>
+    <Highlight>${colors.highlight}</Highlight>
+    <Text>${colors.text}</Text>
+  </Colors>
+  <Images>
+    <Background>background.png</Background>
+  </Images>
+</FLStudioTheme>`;
 
             // Generate colors reference
             const colorsContent = `FL Studio Theme Colors
@@ -647,22 +646,35 @@ Text RGB: ${hexToRgb(colors.text)}`;
 Theme: ${themeName}
 Author: ${author}
 
+IMPORTANT: FL Studio Theme File Format
+This tool generates a .flstheme file. However, please note:
+- FL Studio's native .flstheme format is proprietary and binary
+- This tool creates an XML-based theme file
+- For full theme support, you may need to manually edit FL Studio's theme files
+
 INSTALLATION STEPS:
 1. Close FL Studio completely
 2. Navigate to: C:\\Program Files\\Image-Line\\FL Studio 21\\Artwork
    (or wherever your FL Studio is installed)
 3. BACKUP the original files first!
-4. Copy these files to the Artwork folder:
-   - background.png
-   - theme_config.fls
-5. Restart FL Studio
-6. Your theme should now be active!
+4. Copy the background.png to the Artwork folder
+5. For colors, you'll need to manually edit FL Studio's settings:
+   - Open FL Studio
+   - Go to Options > General Settings
+   - Select your preferred color scheme
+   - Manually set colors using the hex codes below
 
-CUSTOMIZATION NOTES:
-- Primary Accent: ${colors.primary} - Used for main UI elements
-- Secondary Accent: ${colors.secondary} - Used for secondary elements
-- Highlight: ${colors.highlight} - Used for selected items
-- Text: ${colors.text} - Used for text and labels
+YOUR THEME COLORS:
+- Primary Accent: ${colors.primary}
+- Secondary Accent: ${colors.secondary}
+- Highlight: ${colors.highlight}
+- Text: ${colors.text}
+
+ALTERNATIVE METHOD (Manual Theme Creation):
+1. Place background.png in the Artwork folder
+2. In FL Studio, go to Options > General Settings > Display
+3. Set your background image
+4. Manually configure colors in the color scheme editor
 
 TROUBLESHOOTING:
 - If theme doesn't appear, verify file locations
@@ -670,13 +682,13 @@ TROUBLESHOOTING:
 - Try running FL Studio as administrator
 - Restore backup files if issues persist
 
-CONTACT:
-For support, refer back to the theme creator tool.
+NOTE: FL Studio's actual theme format is proprietary. This tool provides
+the base files you need, but some manual configuration may be required.
 
 Generated: ${new Date().toLocaleString()}`;
 
             generatedFiles = {
-                'theme_config.fls': flsThemeContent,
+                'theme.flstheme': flsThemeContent,
                 'colors.txt': colorsContent,
                 'install_instructions.txt': instructionsContent,
                 'background.png': uploadedImage
@@ -707,9 +719,15 @@ Generated: ${new Date().toLocaleString()}`;
         }
 
         function downloadFile(filename, content) {
-            const blob = filename.endsWith('.png') 
-                ? dataURLtoBlob(content)
-                : new Blob([content], { type: 'text/plain' });
+            let blob;
+            if (filename.endsWith('.png')) {
+                blob = dataURLtoBlob(content);
+            } else if (filename.endsWith('.flstheme')) {
+                // Save as XML with .flstheme extension
+                blob = new Blob([content], { type: 'application/xml' });
+            } else {
+                blob = new Blob([content], { type: 'text/plain' });
+            }
             
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
