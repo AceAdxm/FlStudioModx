@@ -28,7 +28,8 @@ ModX is intended for:
 - Full control over UI colors and visual styling  
 - Designed for easy theme iteration and expansion  
 - Extensible structure for future theming methods  
-- Centralized platform for documentation and updates  
+- Centralized platform for documentation and updates
+- Easy to use instructions
 
 ---
 
